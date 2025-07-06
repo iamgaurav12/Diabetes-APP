@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetes Risk Assessment</h1>
+        <form action="/predict" method="post">
+            <div class="form-columns">
+                <!-- Column 1 -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label>Age (years):</label>
+                        <input type="number" name="Age" min="18" max="120" step="1" value="{{ defaults['Age'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Pregnancies:</label>
+                        <input type="number" name="Pregnancies" min="0" max="20" step="1" value="{{ defaults['Pregnancies'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>BMI:</label>
+                        <input type="number" name="BMI" min="10" max="50" step="0.1" value="{{ defaults['BMI'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Glucose (mg/dL):</label>
+                        <input type="number" name="Glucose" min="50" max="300" step="1" value="{{ defaults['Glucose'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Blood Pressure (mmHg):</label>
+                        <input type="number" name="BloodPressure" min="40" max="200" step="1" value="{{ defaults['BloodPressure'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>HbA1c (%):</label>
+                        <input type="number" name="HbA1c" min="3" max="15" step="0.1" value="{{ defaults['HbA1c'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>LDL (mg/dL):</label>
+                        <input type="number" name="LDL" min="30" max="300" step="1" value="{{ defaults['LDL'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>HDL (mg/dL):</label>
+                        <input type="number" name="HDL" min="20" max="120" step="1" value="{{ defaults['HDL'] }}" required>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label>Triglycerides (mg/dL):</label>
+                        <input type="number" name="Triglycerides" min="30" max="500" step="1" value="{{ defaults['Triglycerides'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Waist Circumference (cm):</label>
+                        <input type="number" name="WaistCircumference" min="50" max="150" step="1" value="{{ defaults['WaistCircumference'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Hip Circumference (cm):</label>
+                        <input type="number" name="HipCircumference" min="60" max="200" step="1" value="{{ defaults['HipCircumference'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Waist-Hip Ratio:</label>
+                        <input type="number" name="WHR" min="0.5" max="1.5" step="0.01" value="{{ defaults['WHR'] }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Family History of Diabetes:</label>
+                        <select name="FamilyHistory" required>
+                            <option value="0" {% if defaults['FamilyHistory'] == 0 %}selected{% endif %}>No</option>
+                            <option value="1" {% if defaults['FamilyHistory'] == 1 %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Diet Type:</label>
+                        <select name="DietType" required>
+                            <option value="1" {% if defaults['DietType'] == 1 %}selected{% endif %}>Mostly Unhealthy</option>
+                            <option value="2" {% if defaults['DietType'] == 2 %}selected{% endif %}>Mixed</option>
+                            <option value="3" {% if defaults['DietType'] == 3 %}selected{% endif %}>Mostly Healthy</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Hypertension:</label>
+                        <select name="Hypertension" required>
+                            <option value="0" {% if defaults['Hypertension'] == 0 %}selected{% endif %}>No</option>
+                            <option value="1" {% if defaults['Hypertension'] == 1 %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Medication Use:</label>
+                        <select name="MedicationUse" required>
+                            <option value="0" {% if defaults['MedicationUse'] == 0 %}selected{% endif %}>No</option>
+                            <option value="1" {% if defaults['MedicationUse'] == 1 %}selected{% endif %}>Yes</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit">Assess Diabetes Risk</button>
+        </form>
+        
+        {% if show_result %}
+        <div class="result {% if 'Positive' in prediction_text %}result-positive{% else %}result-negative{% endif %}">
+            <h3>{{ prediction_text }}</h3>
+            {% if 'Positive' in prediction_text %}
+            <p>Consult your healthcare provider for further evaluation.</p>
+            {% else %}
+            <p>Maintain healthy lifestyle habits to reduce your risk.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

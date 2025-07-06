@@ -1,0 +1,259 @@
+/* General Styles and Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #000000; /* Pitch black background */
+  color: #e0e0e0; /* Light gray text */
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #1a1a1a; /* Very dark gray background for the container */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ff6347; /* Tomato red color */
+  font-size: 2.4rem;
+  font-weight: 700;
+  border-bottom: 2px solid #444444; /* Dark border for heading */
+  padding-bottom: 15px;
+}
+
+/* Form Styles */
+form {
+  width: 100%;
+}
+
+.form-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.form-column {
+  flex: 1;
+  min-width: 280px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #f1f1f1; /* Light gray for label */
+}
+
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #3a3a3a; /* Dark border */
+  border-radius: 6px;
+  background-color: #222222; /* Darker input background */
+  color: #ffffff; /* White text */
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #ff6347; /* Tomato red border on focus */
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.3); /* Tomato red shadow */
+}
+
+/* Button Styles */
+button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  background-color: #00bcd4; /* Teal button */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background-color: #00acc1; /* Lighter teal on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Results Styles */
+.result {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.result-positive {
+  background-color: rgba(
+    255,
+    99,
+    71,
+    0.1
+  ); /* Light tomato red for positive result */
+  border: 1px solid rgba(255, 99, 71, 0.3);
+}
+
+.result-negative {
+  background-color: rgba(
+    34,
+    193,
+    195,
+    0.1
+  ); /* Light teal for negative result */
+  border: 1px solid rgba(34, 193, 195, 0.3);
+}
+
+.result h3 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.result-positive h3 {
+  color: #ff6347; /* Tomato red text for positive result */
+}
+
+.result-negative h3 {
+  color: #22c1c3; /* Teal text for negative result */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  input[type="number"],
+  select {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .container {
+    padding: 15px 10px;
+  }
+
+  input[type="number"],
+  select {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Additional Styling for Input Fields */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Custom Tooltips for Form Fields */
+.form-group[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #fff;
+  visibility: visible;
+  animation: tooltipFadeIn 0.3s ease;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Input Focus Styling */
+input[type="number"]:focus,
+select:focus {
+  border-color: #ff6347;
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.3);
+}
